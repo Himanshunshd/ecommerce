@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    List<Product> findByName (String name) ;   // important If a search field is not unique (like product name), use List<Product> because multiple products can match.
+    List<Product> findByName (String name) ;    
     List<Product> findByNameAndPrice (String name , BigDecimal price)  ;
 }
  

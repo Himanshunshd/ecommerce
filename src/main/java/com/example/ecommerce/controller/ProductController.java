@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ecommerce.entity.Product;
 import com.example.ecommerce.service.ProductService;
+import com.example.ecommerce.dto.ProductPriceUpdate;
+import com.example.ecommerce.dto.ProductRequest;
+import com.example.ecommerce.dto.ProductResponse;
 
 import jakarta.validation.Valid;
 
@@ -28,21 +31,21 @@ public class ProductController {
         }
  
     @PostMapping("/products")   // API -> Add Product 
-    public String addProduct(@Valid @RequestBody Product productVar){   // @RequestBody tells spring to take data from http request and convert into JAVA object. i.e, Product productVar = new Product() ;
+    public String addProduct(@Valid @RequestBody ProductRequest productVar){   // @RequestBody tells spring to take data from http request and convert into JAVA object. i.e, Product productVar = new Product() ;
         return service.addProduct(productVar) ;       // Spring creates, Service bean and injects  into Controller. We use that Service object to call  addProduct() method and pass the Product data.
     }
 
-    @GetMapping("/products")   // API -> View Product 
-    public List<Product> viewProduct(){    
+    @GetMapping("/products")   // API -> View Product All.
+    public List<ProductResponse> viewProduct(){    
         return service.viewProduct();       
     }
 
-    @GetMapping("/products/{id}")   // API -> View Particular Product and URL---> NO space.
+    @GetMapping("/products/{id}")   // API -> View Product by ID | URL---> NO space.
     public Product viewProductById(@PathVariable Long id){    
         return service.viewProductById(id) ;       
     }
 
-    @GetMapping("/products/search/name")   // For search — don't use curly braces(eg.- {name}) if you're using @RequestParam. 
+    @GetMapping("/products/search/name")   // API -> View Product by NAME | don't use curly braces if you're using @RequestParam. 
     public List<Product> searchProductByName( @RequestParam String name ){    
         return service.searchProductByName(name) ;       
     }
@@ -53,18 +56,18 @@ public class ProductController {
     }
 
     @PutMapping("/products/{id}")  // API- Upate Product(Full Updation).
-    public String updateProduct(@PathVariable Long id, @Valid  @RequestBody Product product){    
-        return service.updateProduct(id, product) ;       
+    public String updateProduct ( @PathVariable Long id, @Valid  @RequestBody Product productVar ) {    
+        return service.updateProduct(id, productVar) ;       
     }
 
     @PatchMapping("/products/{id}")   // API- Partile Update Product.
-    public String updatePartileProduct(@PathVariable Long id, @RequestBody Product newProduct){    
+    public String updatePartileProduct ( @PathVariable Long id, @Valid @RequestBody ProductPriceUpdate newProduct) {   //@RequestBody --> Converts incoming JSON into a ProductPriceUpdate object.   
         return service.updatePartileProduct(id, newProduct) ;       
     }
 
     @DeleteMapping("/products/{id}")   // API- Delete Product.
     public String deleteProduct(@PathVariable Long id ){    
-        return service.deleteProduct(id ) ;       
+        return service.deleteProduct(id) ;       
     }
 
 }
