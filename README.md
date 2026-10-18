@@ -1,8 +1,8 @@
-E-commerce Backend API
+# E-Commerce Backend API
 
-A backend project built using Java and Spring Boot to develop REST APIs for an e-commerce application. The project follows a layered architecture and uses MySQL to store product information.
+A backend project built using Java 21 and Spring Boot to develop REST APIs for an e-commerce application. The project follows a layered architecture and uses MySQL to store and manage product and category information.
 
-🚀 Technologies Used
+## 🚀 Technologies Used
 
 - Java 21
 - Spring Boot
@@ -13,111 +13,109 @@ A backend project built using Java and Spring Boot to develop REST APIs for an e
 - Postman
 - Jakarta Bean Validation
 
-✨ Features
+## ✨ Features
 
-- Add new products through a REST API.
-- Store product information in a MySQL database.
-- Validate product fields using Jakarta Bean Validation.
-- Use Spring Data JPA for database operations.
-- Test API endpoints using Postman.
+- Add new products.
+- Retrieve all products.
+- Search products by name.
+- Search products by name and price.
+- Update product prices using a DTO.
+- Validate request data using Jakarta Bean Validation.
+- Manage product categories.
+- Store data in MySQL using Spring Data JPA.
+- Handle API errors using exception handling.
 
-📦 Product Information
+## 📦 Product Information
 
 Each product contains the following fields:
 
-- "id" — Unique product identifier
-- "name" — Product name
-- "price" — Product price
-- "quantity" — Available quantity
-- "description" — Product description
+- `id` — Unique product identifier
+- `name` — Product name
+- `price` — Product price
+- `quantity` — Available quantity
+- `description` — Product description
 
-🏗️ Project Architecture
+## 🏗️ Project Architecture
 
-The project follows a layered architecture:
+The application follows a layered architecture:
 
+```text
 Client (Postman)
        |
        v
-Controller
+   Controller
        |
        v
-Service
+    Service
        |
        v
-Repository
+   Repository
        |
        v
-MySQL Database
+  MySQL Database
+```
 
-🔗 API Endpoints
+## 🔗 API Endpoints
 
-Add Product
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | `/products` | Add a product |
+| GET | `/products` | Retrieve all products |
+| GET | `/products/search/name?name=Laptop` | Search products by name |
+| GET | `/products/search?name=Laptop&price=55000` | Search by name and price |
+| PATCH | `/products/{id}` | Update product price, if this matches the implemented mapping |
+| GET | `/categories` | Use only if this endpoint is implemented |
 
-Endpoint: "POST /products"
+Check your controller mappings before adding or changing endpoint paths. Add the remaining category endpoints and product-by-ID endpoint when you confirm their exact mappings.
 
-Request Body:
+## ⚙️ Setup and Installation
 
-{
-  "name": "Laptop",
-  "price": 55000.00,
-  "quantity": 5,
-  "description": "Laptop for daily use"
-}
+1. Clone the repository:
 
-Success Response:
-
-Product Added Successfully.
-
-The API saves product information to the MySQL database.
-
-⚙️ Setup and Installation
-
-1. Clone this repository:
-   
+   ```bash
    git clone https://github.com/Himanshunshd/ecommerce.git
+   ```
 
-2. Open the project in your preferred IDE.
+2. Open the project in your IDE.
 
-3. Create a MySQL database:
-   
-   CREATE DATABASE ecommerce;
+3. Create the MySQL database matching your datasource URL. For example, if your URL uses `e_commerce`:
 
-4. Configure your database connection in "src/main/resources/application.properties".
+   ```sql
+   CREATE DATABASE e_commerce;
+   ```
 
-5. Run the application using Maven:
-   
-   ./mvnw spring-boot:run
-   
-   On Windows, use:
-   
+4. Configure your database URL, username, and password in `src/main/resources/application.properties`.
+
+5. Run the application on Windows:
+
+   ```powershell
    .\mvnw.cmd spring-boot:run
+   ```
 
-6. Test the API using Postman.
+6. Test the API endpoints using Postman.
 
-🔐 Database Configuration
+## 🔐 Database Configuration
 
-Configure the following properties in "application.properties" using your own database credentials:
+Use your own local database credentials. Never commit real passwords, API keys, or other secrets to GitHub.
 
-spring.datasource.url=jdbc:mysql://localhost:3306/ecommerce
-spring.datasource.username=YOUR_USERNAME
-spring.datasource.password=YOUR_PASSWORD
+For better security, store the database password in an environment variable and reference it from your application configuration.
 
-Important: Never commit your actual database password or other secrets to GitHub.
+## 📌 Future Improvements
 
-📌 Future Improvements
+- Retrieve a product by ID.
+- Update complete product details.
+- Delete products.
+- Add pagination and sorting.
+- Improve API documentation.
+- Add automated tests.
 
-- Retrieve all products
-- Retrieve a product by ID
-- Update product details
-- Delete products
-- Improve API error handling
-- Add pagination and sorting
-- Implement product categories and search
+Update this list as each feature is completed.
 
-👨‍💻 Developer
+## 👨‍💻 Developer
 
-Himanshu Nishad
+**Himanshu Nishad**
 
-GitHub: "Himanshunshd" (https://github.com/Himanshunshd)
+GitHub: https://github.com/Himanshunshd
 
-This project is being developed as part of my learning journey in Java Backend Development and Spring Boot.
+This project is part of my learning journey in Java Backend Development and Spring Boot.
+
