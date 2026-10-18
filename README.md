@@ -15,14 +15,12 @@ A backend project built using Java 21 and Spring Boot to develop REST APIs for a
 
 ## ✨ Features
 
-- Add new products.
-- Retrieve all products.
-- Search products by name.
-- Search products by name and price.
+- Add, retrieve, update, and delete products.
+- Search products by name and by name and price.
 - Update product prices using a DTO.
-- Validate request data using Jakarta Bean Validation.
 - Manage product categories.
-- Store data in MySQL using Spring Data JPA.
+- Validate request data using Jakarta Bean Validation.
+- Perform database operations using Spring Data JPA.
 - Handle API errors using exception handling.
 
 ## 📦 Product Information
@@ -59,14 +57,16 @@ Client (Postman)
 
 | Method | Endpoint | Purpose |
 |---|---|---|
-| POST | `/products` | Add a product |
+| POST | `/products` | Add a new product |
 | GET | `/products` | Retrieve all products |
+| GET | `/products/{id}` | Retrieve a product by ID |
+| DELETE | `/products/{id}` | Delete a product by ID |
 | GET | `/products/search/name?name=Laptop` | Search products by name |
 | GET | `/products/search?name=Laptop&price=55000` | Search by name and price |
-| PATCH | `/products/{id}` | Update product price, if this matches the implemented mapping |
-| GET | `/categories` | Use only if this endpoint is implemented |
+| PATCH | `/products/{id}` | Update product price |
+| GET | `/categories` | Retrieve categories, if implemented |
 
-Check your controller mappings before adding or changing endpoint paths. Add the remaining category endpoints and product-by-ID endpoint when you confirm their exact mappings.
+Include any additional category endpoints using their actual controller mappings.
 
 ## ⚙️ Setup and Installation
 
@@ -76,7 +76,7 @@ Check your controller mappings before adding or changing endpoint paths. Add the
    git clone https://github.com/Himanshunshd/ecommerce.git
    ```
 
-2. Open the project in your IDE.
+2. Open the project in your preferred IDE.
 
 3. Create the MySQL database matching your datasource URL. For example, if your URL uses `e_commerce`:
 
@@ -84,7 +84,7 @@ Check your controller mappings before adding or changing endpoint paths. Add the
    CREATE DATABASE e_commerce;
    ```
 
-4. Configure your database URL, username, and password in `src/main/resources/application.properties`.
+4. Configure the database connection in `src/main/resources/application.properties` using your own credentials.
 
 5. Run the application on Windows:
 
@@ -96,20 +96,15 @@ Check your controller mappings before adding or changing endpoint paths. Add the
 
 ## 🔐 Database Configuration
 
-Use your own local database credentials. Never commit real passwords, API keys, or other secrets to GitHub.
-
-For better security, store the database password in an environment variable and reference it from your application configuration.
+Use your own local database credentials. Never commit actual passwords, API keys, or other secrets to GitHub.
 
 ## 📌 Future Improvements
 
-- Retrieve a product by ID.
-- Update complete product details.
-- Delete products.
 - Add pagination and sorting.
 - Improve API documentation.
 - Add automated tests.
 
-Update this list as each feature is completed.
+These improvements can be updated as the project evolves.
 
 ## 👨‍💻 Developer
 
@@ -118,4 +113,3 @@ Update this list as each feature is completed.
 GitHub: https://github.com/Himanshunshd
 
 This project is part of my learning journey in Java Backend Development and Spring Boot.
-
